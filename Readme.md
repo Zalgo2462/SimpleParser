@@ -1,18 +1,19 @@
 # Recursive Descent
 
-### Authors:
-#### Logan Lembke
-#### Lawrence Hoffman
+## Authors:
+### Logan Lembke
+### Lawrence Hoffman
 
-### Professor:
-#### John M. Weiss, Ph.D.
+## Professor:
+### John M. Weiss, Ph.D.
 
-### Course:
-#### CSC 461
-#### Fall 2017
+## Course:
+### CSC 461
+### Fall 2017
 
 
 
+### Language to be implemented:
 ```EBNF
 <expr>    -> <term> { <addop> <term> }
 <term>    -> <factor> { <mulop> <factor> }
@@ -27,4 +28,21 @@
 <digit>   -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 <addop>   -> + | -
 <mulop>   -> * | / | %
+```
+
+### Example run:
+```sh
+% java Parser
+Enter expression: A + B
+"A + B" is a valid expression
+Enter expression: ((A+B) * C )
+"((A + B) * C)" is a valid expression
+Enter expression: ((A + B) * C))
+"((A + B) * C))" is not a valid expression
+Enter expression: A + * B
+"A + * B" is not a valid expression
+Enter expression: hi * -3.14159
+"hi * -3.14159" is a valid expression
+Enter expression:
+(end of input)
 ```
