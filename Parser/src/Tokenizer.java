@@ -19,89 +19,17 @@ public class Tokenizer {
     private static final String o = "+-*/%()";
 
     /**
-     * Turn our valid letters into a queryable set
+     * Turn our valid letters, digits, and operations into a queryable set
      */
-    private Set<Character> letters = new HashSet<>();
-
-    /**
-     * Turn our valid digits into a queryable set
-     */
-    private Set<Character> digits = new HashSet<>();
-
-    /**
-     * Turn our valid operations into a queryable set
-     */
-    private Set<Character> ops = new HashSet<>();
-
-
-    /**
-     * Make identifying Tokens easier for the parser
-     */
-    public enum TokenType {
-        ADDOP, MULOP, ID, INTEGER, FLOAT, L_PAREN, R_PAREN, TK_EOF
-    }
-
-    /**
-     * Token is a simple wrapper to be handed over to the parser to make the
-     * job of creating the AST a little easier
-     */
-    public class Token {
-        /**
-         * What type of token this object holds
-         */
-        TokenType type;
-
-        /**
-         * The literal value of the token from the input
-         */
-        String literal;
-
-        /**
-         * Build a new Token
-         * @param t TokenType with the type of the token being built
-         * @param l String containing the literal parsed value that generated
-         *          this token
-         */
-        Token(TokenType t, String l) {
-            type = t;
-            literal = l;
-        }
-
-        public String toString() {
-            switch(type) {
-                case ADDOP:
-                    return "ADDOP(" + literal + ")";
-
-                case MULOP:
-                    return "MULOP(" + literal + ")";
-
-                case ID:
-                    return "ID(" + literal + ")";
-
-                case FLOAT:
-                    return "FLOAT(" + literal + ")";
-
-                case INTEGER:
-                    return "INTEGER(" + literal + ")";
-
-                case L_PAREN:
-                    return "L_PAREN(" + literal + ")";
-
-                case R_PAREN:
-                    return "R_PAREN(" + literal + ")";
-
-                case TK_EOF:
-                    return "TK_EOF(" + literal + ")";
-
-            }
-
-            return "";
-        }
-    }
+    private Set<Character> letters, digits, ops;
 
     private List<Token> tokens;
 
     public Tokenizer(String input) throws ParseError {
+
+        letters = new HashSet<Character>();
+        digits = new HashSet<Character>();
+        ops = new HashSet<Character>();
 
         for(char c : l.toCharArray()) {
             letters.add(c);
@@ -115,7 +43,7 @@ public class Tokenizer {
             ops.add(c);
         }
 
-        tokens = new ArrayList<>();
+        tokens = new ArrayList<Token>();
 
         // Split the input string into whitespace delimited chunks
         String chunks[] = input.split("\\s+");
@@ -124,7 +52,7 @@ public class Tokenizer {
                 parseTokens(chunk);
         }
 
-        tokens.add(new Token(TokenType.TK_EOF, ""));
+        tokens.add(new Token(Token.Type.TK_EOF, ""));
 
     }
 
@@ -154,16 +82,16 @@ public class Tokenizer {
 
         while(offt < s.length() &&
                 (letters.contains(s.charAt(offt)) ||
-                        digits.contains(s.charAt(offt)))) {
+                  digits.contains(s.charAt(offt)))) {
             lit.append(s.charAt(offt));
             offt++;
         }
 
-        tokens.add(new Token(TokenType.ID, lit.toString()));
+        tokens.add(new Token(Token.Type.ID, lit.toString()));
         if(offt == s.length()) {
             return "";
         }
-        return s.substring(offt + 1);
+        return s.substring(offt);
     }
 
     private String parseNum(String s) throws ParseError {
@@ -182,10 +110,10 @@ public class Tokenizer {
         }
 
         if (deccount == 0) {
-            tokens.add(new Token(TokenType.INTEGER, lit.toString()));
+            tokens.add(new Token(Token.Type.INTEGER, lit.toString()));
         }
         else if (deccount == 1) {
-            tokens.add(new Token(TokenType.FLOAT, lit.toString()));
+            tokens.add(new Token(Token.Type.FLOAT, lit.toString()));
         }
         else {
             throw new ParseError("Unrecognized token pattern, contains too many \".\"");
@@ -199,25 +127,25 @@ public class Tokenizer {
     private String parseOps(String s) {
         switch (s.charAt(0)) {
             case '(':
-                tokens.add(new Token(TokenType.L_PAREN, "("));
+                tokens.add(new Token(Token.Type.L_PAREN, "("));
                 break;
             case ')':
-                tokens.add(new Token(TokenType.R_PAREN, ")"));
+                tokens.add(new Token(Token.Type.R_PAREN, ")"));
                 break;
             case '+':
-                tokens.add(new Token(TokenType.ADDOP, "+"));
+                tokens.add(new Token(Token.Type.ADDOP, "+"));
                 break;
             case '-':
-                tokens.add(new Token(TokenType.ADDOP, "-"));
+                tokens.add(new Token(Token.Type.ADDOP, "-"));
                 break;
             case '*':
-                tokens.add(new Token(TokenType.MULOP, "*"));
+                tokens.add(new Token(Token.Type.MULOP, "*"));
                 break;
             case '/':
-                tokens.add(new Token(TokenType.MULOP, "/"));
+                tokens.add(new Token(Token.Type.MULOP, "/"));
                 break;
             case '%':
-                tokens.add(new Token(TokenType.MULOP, "%"));
+                tokens.add(new Token(Token.Type.MULOP, "%"));
                 break;
         }
 
@@ -230,7 +158,7 @@ public class Tokenizer {
     public String toString() {
         StringBuilder retval = new StringBuilder("[ ");
         for(Token t : tokens) {
-            if (t.type == TokenType.TK_EOF) {
+            if (t.type == Token.Type.TK_EOF) {
                 retval.append(t.toString());
                 break;
             }

@@ -21,3 +21,6 @@
 # Editor artifacts
 .idea
 *.swp
+
+# Build directory
+build/
