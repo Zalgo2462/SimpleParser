@@ -15,7 +15,7 @@ public class Parser {
             return;
         }
 
-        while(input.equals("exit")) {
+        while(!input.equals("exit")) {
             Tokenizer t;
             try {
                 t = new Tokenizer(input);

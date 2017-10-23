@@ -232,6 +232,7 @@ public class Tokenizer {
         for(Token t : tokens) {
             if (t.type == TokenType.TK_EOF) {
                 retval.append(t.toString());
+                break;
             }
             retval.append(t.toString()).append(", ");
         }
