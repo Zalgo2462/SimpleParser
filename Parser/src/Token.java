@@ -6,40 +6,52 @@
 public class Token {
 
     /**
-     * Make identifying Tokens easier for the parser
+     * Type makes identifying Tokens easier for the parser
      */
     public enum Type {
-        ADDOP, MULOP, ID, INTEGER, FLOAT, L_PAREN, R_PAREN, TK_EOF
+        ADD_OP, MUL_OP, ID, INTEGER, FLOAT, L_PAREN, R_PAREN, TK_EOF
     }
 
     /**
-     * What type of token this object holds
+     * type is the Type of the token this object holds
      */
-    Type type;
+    private final Type type;
 
     /**
-     * The literal value of the token from the input
+     * literal is the value of the token from the input
      */
-    String literal;
+    private final String literal;
 
     /**
      * Build a new Token
-     * @param t TokenType with the type of the token being built
-     * @param l String containing the literal parsed value that generated
+     * @param type Type with the type of the token being built
+     * @param literal String containing the literal parsed value that generated
      *          this token
      */
-    Token(Type t, String l) {
-        type = t;
-        literal = l;
+    public Token(final Type type, final String literal) {
+        this.type = type;
+        this.literal = literal;
     }
 
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getLiteral() {
+        return literal;
+    }
+
+    /**
+     * @return a string representation with the Type and literal value of the token
+     */
     public String toString() {
         switch(type) {
-            case ADDOP:
-                return "ADDOP(" + literal + ")";
+            case ADD_OP:
+                return "ADD_OP(" + literal + ")";
 
-            case MULOP:
-                return "MULOP(" + literal + ")";
+            case MUL_OP:
+                return "MUL_OP(" + literal + ")";
 
             case ID:
                 return "ID(" + literal + ")";
