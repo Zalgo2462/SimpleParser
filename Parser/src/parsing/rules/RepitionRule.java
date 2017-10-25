@@ -3,11 +3,10 @@ package parsing.rules;
 import parsing.TokenStream;
 
 /**
- * RepetitionRule is an optional rule for iteration in EBNF.
  * RepetitionRule tries to match as many copies of the
  * ProductionRule fed to it.
  */
-public class RepitionRule extends OptionalRule {
+public class RepitionRule extends ProductionRule {
     private final ProductionRule productionRule;
 
     public RepitionRule(final ProductionRule productionRule) {

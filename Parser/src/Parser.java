@@ -42,14 +42,14 @@ public class Parser {
 
 
         expr.appendRule(term);
-        expr.appendRule(new RepitionRule(new BacktrackingRule(new ProductionRule[]{
+        expr.appendRule(new OptionalRule(new RepitionRule(new BacktrackingRule(new ProductionRule[]{
                 new TypeRule(Token.Type.ADD_OP), term
-        })));
+        }))));
 
         term.appendRule(factor);
-        term.appendRule(new RepitionRule(new BacktrackingRule(new ProductionRule[]{
+        term.appendRule(new OptionalRule(new RepitionRule(new BacktrackingRule(new ProductionRule[]{
                 new TypeRule(Token.Type.MUL_OP), factor
-        })));
+        }))));
 
         factor.appendRule(new TypeRule(Token.Type.INTEGER));
         factor.appendRule(new TypeRule(Token.Type.FLOAT));
