@@ -80,20 +80,22 @@ public class Tokenizer {
     /**
      * parseTokens generates lexing.Token objects and stores them in this.lexing.
      *
-     * @param s The string to tokenize
+     * @param string The string to tokenize
      * @throws LexError Generated when the string does not conform to the specifications
      */
-    private void parseTokens(String s) throws LexError {
-        s = s.replaceAll("\\s+", "");
-        while (s.length() > 0) {
-            if (letters.contains(s.charAt(0))) {
-                s = parseId(s);
-            } else if (digits.contains(s.charAt(0))) {
-                s = parseNum(s);
-            } else if (ops.contains(s.charAt(0))) {
-                s = parseOps(s);
-            } else {
-                throw new LexError("Unrecognized char in input" + s.charAt(0));
+    private void parseTokens(String string) throws LexError {
+        String[] words = string.split("\\s+");
+        for (String word : words) {
+            while (word.length() > 0) {
+                if (letters.contains(word.charAt(0))) {
+                    word = parseId(word);
+                } else if (digits.contains(word.charAt(0))) {
+                    word = parseNum(word);
+                } else if (ops.contains(word.charAt(0))) {
+                    word = parseOps(word);
+                } else {
+                    throw new LexError("Unrecognized char in input" + word.charAt(0));
+                }
             }
         }
     }
