@@ -204,14 +204,16 @@ public class Tokenizer {
         return input.substring(1);
     }
 
-    /**
+    /** Get a TokenStream object to the tokens in this object
+     *
      * @return a list of lexing found by the tokenizer in order
      */
     public TokenStream getTokens() {
         return new TokenStream(tokens);
     }
 
-    /**
+    /** Build a technical representation of the token stream to be used in debugging
+     *
      * @return an annotated description of the lexing generated from the given input
      */
     public String toString() {
@@ -226,5 +228,28 @@ public class Tokenizer {
         }
 
         return returnVal + " ]";
+    }
+
+    /**
+     * Build a non technical representation of the input that removes newlines
+     * and extra spaces.
+     *
+     * @return StringBuilder with the original input cleaned up.
+     */
+    public StringBuilder cleanInput() {
+        StringBuilder cleaned = new StringBuilder("");
+        for (Token t : this.tokens) {
+
+            String lit = t.getLiteral();
+
+            // if it's an operator, add a space on either side
+            if (t.getType() == Token.Type.MUL_OP || t.getType() == Token.Type.ADD_OP) {
+                lit = " " + lit + " ";
+                cleaned.append(lit);
+            } else {
+                cleaned.append(lit);
+            }
+        }
+        return cleaned;
     }
 }
