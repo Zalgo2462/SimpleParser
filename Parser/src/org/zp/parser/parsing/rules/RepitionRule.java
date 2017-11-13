@@ -1,6 +1,6 @@
-package parsing.rules;
+package org.zp.parser.parsing.rules;
 
-import parsing.TokenStream;
+import org.zp.parser.parsing.TokenStream;
 
 /**
  * RepetitionRule tries to match as many copies of the

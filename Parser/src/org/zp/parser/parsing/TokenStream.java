@@ -1,6 +1,6 @@
-package parsing;
+package org.zp.parser.parsing;
 
-import lexing.Token;
+import org.zp.parser.lexing.Token;
 
 import java.util.List;
 

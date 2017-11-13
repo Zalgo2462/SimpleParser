@@ -1,6 +1,6 @@
-package lexing;
+package org.zp.parser.lexing;
 
-import parsing.TokenStream;
+import org.zp.parser.parsing.TokenStream;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * lexing.Tokenizer takes in an input string and tokenizes it according to the
+ * org.zp.parser.lexing.Tokenizer takes in an input string and tokenizes it according to the
  * specifications of the PL HW #3 assignment.
  */
 public class Tokenizer {
@@ -41,12 +41,12 @@ public class Tokenizer {
     private final Set<Character> ops;
 
     /**
-     * lexing holds the parsed lexing from the input
+     * org.zp.parser.lexing holds the parsed org.zp.parser.lexing from the input
      */
     private final List<Token> tokens;
 
     /**
-     * lexing.Tokenizer takes in an input string and tokenizes it according to the
+     * org.zp.parser.lexing.Tokenizer takes in an input string and tokenizes it according to the
      * specifications of the PL HW #3 assignment.
      *
      * @param input The string to tokenize
@@ -71,7 +71,7 @@ public class Tokenizer {
             ops.add(c);
         }
 
-        // Start lexing
+        // Start org.zp.parser.lexing
         tokens = new ArrayList<>();
 
         // Split the input string into whitespace delimited chunks
@@ -83,7 +83,7 @@ public class Tokenizer {
     }
 
     /**
-     * parseTokens generates lexing.Token objects and stores them in this.lexing.
+     * parseTokens generates org.zp.parser.lexing.Token objects and stores them in this.org.zp.parser.lexing.
      *
      * @param string The string to tokenize
      * @throws LexError Generated when the string does not conform to the specifications
@@ -106,8 +106,8 @@ public class Tokenizer {
     }
 
     /**
-     * parseId assumes the beginning of input is a valid lexing.Token.Type.ID, reads the ID from
-     * input, stores the ID in this.lexing, and returns the input string sans the
+     * parseId assumes the beginning of input is a valid org.zp.parser.lexing.Token.Type.ID, reads the ID from
+     * input, stores the ID in this.org.zp.parser.lexing, and returns the input string sans the
      * ID.
      *
      * @param input the string to parse the id out of
@@ -133,8 +133,8 @@ public class Tokenizer {
     }
 
     /**
-     * parseNum assumes the beginning of input is a valid lexing.Token.Type.INTEGER or lexing.Token.Type.FLOAT,
-     * reads the number from input, stores the number in this.lexing, and returns the input string sans the
+     * parseNum assumes the beginning of input is a valid org.zp.parser.lexing.Token.Type.INTEGER or org.zp.parser.lexing.Token.Type.FLOAT,
+     * reads the number from input, stores the number in this.org.zp.parser.lexing, and returns the input string sans the
      * number.
      *
      * @param input the string to parse the number out of
@@ -174,7 +174,7 @@ public class Tokenizer {
 
     /**
      * parseOps assumes the beginning of input is a valid L_PAREN, R_PAREN, MUL_OP, or ADD_OP,
-     * reads the operation from input, stores the operation in this.lexing, and returns the input string sans the
+     * reads the operation from input, stores the operation in this.org.zp.parser.lexing, and returns the input string sans the
      * operation.
      *
      * @param input the string to parse the operation out of
@@ -211,7 +211,7 @@ public class Tokenizer {
 
     /** Get a TokenStream object to the tokens in this object
      *
-     * @return a list of lexing found by the tokenizer in order
+     * @return a list of org.zp.parser.lexing found by the tokenizer in order
      */
     public TokenStream getTokens() {
         return new TokenStream(tokens);
@@ -219,7 +219,7 @@ public class Tokenizer {
 
     /** Build a technical representation of the token stream to be used in debugging
      *
-     * @return an annotated description of the lexing generated from the given input
+     * @return an annotated description of the org.zp.parser.lexing generated from the given input
      */
     public String toString() {
         StringBuilder returnVal = new StringBuilder("[ ");

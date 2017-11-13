@@ -1,7 +1,7 @@
-package lexing;
+package org.zp.parser.lexing;
 
 /**
- * lexing.Token is a simple wrapper to be handed over to the parser to make the
+ * org.zp.parser.lexing.Token is a simple wrapper to be handed over to the parser to make the
  * job of creating the AST a little easier
  */
 public class Token {
@@ -16,13 +16,13 @@ public class Token {
     private final String literal;
 
     /**
-     * Build a new lexing.Token
+     * Build a new org.zp.parser.lexing.Token
      *
      * @param type    Type with the type of the token being built
      * @param literal String containing the literal parsed value that generated
      *                this token
      */
-    public Token(final Type type, final String literal) {
+    Token(final Type type, final String literal) {
         this.type = type;
         this.literal = literal;
     }

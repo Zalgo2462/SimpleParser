@@ -1,7 +1,7 @@
-package parsing.rules;
+package org.zp.parser.parsing.rules;
 
-import lexing.Token;
-import parsing.TokenStream;
+import org.zp.parser.lexing.Token;
+import org.zp.parser.parsing.TokenStream;
 
 import java.util.List;
 

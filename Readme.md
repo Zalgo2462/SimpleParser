@@ -19,7 +19,7 @@
 <term>    -> <factor> { <mulop> <factor> }
 <factor>  -> <integer> | <float> | <id> | '(' <expr> ')' | [-] <factor>
 <integer> -> <digit> { <digit> }
-<float>   -> <integer> . <integer>
+<float>   -> [<integer>] . <integer>
 <id>      -> <letter> { <letter> | <digit> }
 <letter>  -> A | B | C | D | E | F | G | H | I | J | K | L | M |
              N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
@@ -32,7 +32,7 @@
 
 ### Example run:
 ```sh
-% java Parser
+% java org.zp.parser.Parser
 Enter expression: A + B
 "A + B" is a valid expression
 Enter expression: ((A+B) * C )

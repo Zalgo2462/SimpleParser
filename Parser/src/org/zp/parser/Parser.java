@@ -1,18 +1,20 @@
-import lexing.LexError;
-import lexing.Token;
-import lexing.Tokenizer;
-import parsing.TokenStream;
-import parsing.rules.*;
+package org.zp.parser;
+
+import org.zp.parser.lexing.LexError;
+import org.zp.parser.lexing.Token;
+import org.zp.parser.lexing.Tokenizer;
+import org.zp.parser.parsing.TokenStream;
+import org.zp.parser.parsing.rules.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Implementation of the top level parsing functionality as defined in the
+ * Implementation of the top level org.zp.parser.parsing functionality as defined in the
  * specifications. Contains the main() entry point for the program.
  */
-public class Parser {
+class Parser {
 
     /**
      * Entry point of the parser program
