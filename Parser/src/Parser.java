@@ -23,6 +23,7 @@ public class Parser {
      * @param args command line arguments
      */
     public static void main(String[] args) {
+
         BufferedReader buff = new BufferedReader(new InputStreamReader(System.in));
         String input;
         Tokenizer t;
@@ -31,22 +32,20 @@ public class Parser {
         try {
             System.out.print("Enter expression: ");
             input = buff.readLine();
-            tokenStr = "";
-            validMsg = new StringBuilder("");
             while (!input.equals("")) {
+                tokenStr = "";
+                validMsg = new StringBuilder(input);
                 try {
-
                     t = new Tokenizer(input);
                     tokenStr = t.toString();
-                    validMsg = t.cleanInput();
                     if( parse(t.getTokens()) ) {
+                        validMsg = t.cleanInput();
                         validMsg.append(" is a valid expression");
                     } else {
                         validMsg.append(" is not a valid expression");
                     }
 
                 } catch (LexError e) {
-                    validMsg.append(input);
                     validMsg.append(" is not a valid expression");
                 }
 
