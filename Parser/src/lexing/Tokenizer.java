@@ -29,6 +29,11 @@ public class Tokenizer {
     private static final String OPERATORS = "+-*/%()";
 
     /**
+     * DOT represents the decimal point
+     */
+    private static final char DOT = '.';
+
+    /**
      * Turn our valid letters, digits, and operations into a queryable set
      */
     private final Set<Character> letters;
@@ -89,7 +94,7 @@ public class Tokenizer {
             while (word.length() > 0) {
                 if (letters.contains(word.charAt(0))) {
                     word = parseId(word);
-                } else if (digits.contains(word.charAt(0))) {
+                } else if (digits.contains(word.charAt(0)) || word.charAt(0) == DOT) {
                     word = parseNum(word);
                 } else if (ops.contains(word.charAt(0))) {
                     word = parseOps(word);
@@ -144,9 +149,9 @@ public class Tokenizer {
 
         while (offset < input.length() &&
                 (digits.contains(input.charAt(offset)) ||
-                        input.charAt(offset) == '.')) {
+                        input.charAt(offset) == DOT)) {
 
-            if (input.charAt(offset) == '.') {
+            if (input.charAt(offset) == DOT) {
                 decCount++;
             }
             literal.append(input.charAt(offset));
@@ -155,7 +160,7 @@ public class Tokenizer {
 
         if (decCount == 0) {
             this.tokens.add(new Token(Token.Type.INTEGER, literal.toString()));
-        } else if (decCount == 1) {
+        } else if (decCount == 1 && input.length() > 1) {
             this.tokens.add(new Token(Token.Type.FLOAT, literal.toString()));
         } else {
             throw new LexError("Unrecognized token pattern, contains too many \".\"");
